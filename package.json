@@ -11,11 +11,19 @@
     "react-scripts": "5.0.0",
     "web-vitals": "^2.1.4"
   },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "index.js"
+    ]
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js,.jsx",
+    "lint:styles": "npx stylelint '**/*.css'",
+    "test-coverage": "react-scripts test --coverage --watchAll=false"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +42,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.0",
+    "eslint": "6.8.0",
+    "eslint-config-trybe-frontend": "1.2.0",
+    "eslint-plugin-babel": "^5.3.1",
+    "postcss": "^8.4.4",
+    "stylelint": "^13.8.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-order": "^4.1.0"
   }
 }
