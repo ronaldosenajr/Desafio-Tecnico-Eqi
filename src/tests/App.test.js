@@ -95,4 +95,42 @@ describe('Testa a Tela Inicial', () => {
       expect(labelError).toHaveLength(2);
     });
   });
+  describe('Testa o Input Field "Prazo (em meses)"', () => {
+    let prazoInput = '';
+    const ariaInvalid = 'aria-invalid';
+    beforeEach(() => {
+      renderWithRouter(<TelaInicial />);
+      prazoInput = screen.getByLabelText('Prazo (em meses)');
+    });
+    test(`Se o Input Field "Prazo (em meses) está vazio e
+    mostra uma mensagem de error ao iniciar"`, () => {
+      expect(prazoInput.value).toBe('');
+      const labelError = screen.getByText(/Prazo deve ser um número/i);
+      expect(labelError).toBeInTheDocument();
+      expect(prazoInput).toHaveAttribute(ariaInvalid, 'true');
+    });
+    test(`Se o Input Field "Prazo (em meses) recebe os valores corretamente e
+    deixa de mostrar a msg de erro`, () => {
+      const value = '20';
+      const msg = /Prazo deve ser um número/i || /Prazo deve ser um número maior que 0/i;
+      expect(prazoInput.value).toBe('');
+      const labelError = screen.getByText(msg);
+      fireEvent.change(prazoInput, { target: { value: 20 } });
+      expect(prazoInput.value).toBe(value);
+      expect(prazoInput).toHaveAttribute(ariaInvalid, 'false');
+      expect(labelError).not.toBeInTheDocument();
+    });
+    test(`Se o Input Field "Prazo (em meses) recebe valores incorretos
+     e mostra a mensagem de erro`, () => {
+      expect(prazoInput.value).toBe('');
+      fireEvent.change(prazoInput, { target: { value: -5 } });
+      expect(prazoInput).toHaveAttribute(ariaInvalid, 'true');
+      const labelError = screen.getByText('Prazo deve ser um número maior que 0');
+      expect(labelError).toBeInTheDocument();
+      fireEvent.change(prazoInput, { target: { value: 'Prazo' } });
+      expect(prazoInput).toHaveAttribute(ariaInvalid, 'true');
+      const newLabelError = screen.getByText('Prazo deve ser um número');
+      expect(newLabelError).toBeInTheDocument();
+    });
+  });
 });
