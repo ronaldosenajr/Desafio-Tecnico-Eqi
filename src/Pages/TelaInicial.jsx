@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import useWindowDimensions from '../hooks/GetWindowSize';
 import ClearAndSendComponent from '../Components/ClearAndSendComponent';
 import SimulationForms from '../Components/SimulationForms';
+import SimulationResult from '../Components/SimulationResult';
 
 function TelaInicial() {
   const [tipoRendimento, setTipoRendimento] = useState('bruto');
@@ -16,7 +17,11 @@ function TelaInicial() {
   const [ipca, setIpca] = useState('');
   const [cdi, setCdi] = useState('');
   const [status, setStatus] = useState([]);
+  const [apiValues, setApiValues] = useState([]);
+  const [showResult, setShowResult] = useState(false);
+
   const { isMobile } = useWindowDimensions();
+  console.log(setApiValues);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -95,6 +100,7 @@ function TelaInicial() {
             setCanSendValues={ setStatus }
             status={ status }
           />
+          {showResult && <SimulationResult apiValues={ apiValues } />}
         </Box>
       </Box>
       <ClearAndSendComponent
