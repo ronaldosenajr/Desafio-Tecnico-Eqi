@@ -41,4 +41,18 @@ describe('Testa a Tela Inicial', () => {
     expect(clearFields).toBeInTheDocument();
     expect(simulate).toBeInTheDocument();
   });
+  test('Se ao abrir a página o botão "Bruto" está selecionado', () => {
+    const selectedColor = 'rgb(237, 142, 83)';
+    renderWithRouter(<TelaInicial />);
+    const bruto = screen.getByRole('button', { name: /bruto/i });
+    const liquido = screen.getByRole('button', { name: /líquido/i });
+    expect(bruto).toHaveStyle({ backgroundColor: selectedColor });
+    expect(liquido).not.toHaveStyle({ backgroundColor: selectedColor });
+  });
+  test('Se ao abrir a página o botão "PRÉ" está selecionado', () => {
+    renderWithRouter(<TelaInicial />);
+    const selectedColor = 'rgb(237, 142, 83)';
+    const pre = screen.getByRole('button', { name: /pré/i });
+    expect(pre).toHaveStyle({ backgroundColor: selectedColor });
+  });
 });
