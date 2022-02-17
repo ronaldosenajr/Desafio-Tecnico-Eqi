@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 import TelaInicial from '../Pages/TelaInicial';
 import App from '../App';
@@ -59,5 +59,40 @@ describe('Testa a Tela Inicial', () => {
     renderWithRouter(<TelaInicial />);
     const simulate = screen.getByRole('button', { name: /SIMULAR/i });
     expect(simulate).toHaveAttribute('disabled', '');
+  });
+  describe('Testa o Input Field "Aporte Inicial"', () => {
+    let aporteInicial = '';
+    beforeEach(() => {
+      renderWithRouter(<TelaInicial />);
+      aporteInicial = screen.getByLabelText('Aporte Inicial');
+      expect(aporteInicial).toBeInTheDocument();
+    });
+    test(`Se ao iniciar o "Aporte Inicial" está mostrando uma mensagem de erro
+     e está vazio`, () => {
+      const labelError = screen.getAllByText(/Aporte deve ser um número/i);
+      expect(labelError).toHaveLength(2);
+      expect(aporteInicial.value).toBe('');
+    });
+    test(`Se o Input Field "Aporte Inicial" recebe os valores 
+    corretamente e deixa de mostrar a msg de Error`, () => {
+      const value = '1500.00,25';
+      const labelError = screen.getAllByText(/Aporte deve ser um número/i);
+      expect(labelError).toHaveLength(2);
+      expect(aporteInicial.value).toBe('');
+      fireEvent.change(aporteInicial, { target: { value } });
+      expect(aporteInicial.value).toBe(value);
+      const newLabelError = screen.getByText(/Aporte deve ser um número/i);
+      expect(newLabelError).not.toBe('array');
+    });
+    test(`Se o Input Field "Aporte Inicial" continua mostrando a msg de erro
+    se o que foi digitado não for um número`, () => {
+      const value = 'Aporte';
+      const labelError = screen.getAllByText(/Aporte deve ser um número/i);
+      expect(labelError).toHaveLength(2);
+      expect(aporteInicial.value).toBe('');
+      fireEvent.change(aporteInicial, { target: { value } });
+      expect(aporteInicial.value).toBe(value);
+      expect(labelError).toHaveLength(2);
+    });
   });
 });
