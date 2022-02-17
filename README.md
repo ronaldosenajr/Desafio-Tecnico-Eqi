@@ -73,3 +73,9 @@ npm run lint
 - [ESLint](https://eslint.org/)
 - [Git](https://git-scm.com/)
 - [GitHub](https://github.com/)
+
+<h3 align="left">Conecte-se Comigo:</h3>
+<p align="left">
+<a href="https://twitter.com/ddinhos" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="ddinhos" height="30" width="40" /></a>
+<a href="https://linkedin.com/in/ronaldo-sena-junior" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="ronaldo-sena-junior" height="30" width="40" /></a>
+</p>
