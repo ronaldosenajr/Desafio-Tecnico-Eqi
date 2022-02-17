@@ -29,7 +29,7 @@ React is a JavaScript library for building user interfaces.
 
 ## Utilização
 
-⚠️ 1. Crie um arquivo `.env`
+⚠️ 1. Crie um arquivo `.env` na pasta raiz do projeto
 
 - Crie a variavel `REACT_APP_API_URL` com o valor sendo a `URL` da `API`
   - Exemplo: `REACT_APP_API_URL=http://localhost:3000`
