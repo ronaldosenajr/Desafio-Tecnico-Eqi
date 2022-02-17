@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import useWindowDimensions from '../hooks/GetWindowSize';
+import ClearAndSendComponent from '../Components/ClearAndSendComponent';
 import SimulationForms from '../Components/SimulationForms';
 
 function TelaInicial() {
@@ -34,6 +35,16 @@ function TelaInicial() {
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const clearFields = () => {
+    setValues({
+      aporteInicial: '',
+      aporteMensal: '',
+      prazo: '',
+      rentabilidade: '',
+    });
+    setShowResult(false);
   };
 
   return (
@@ -86,7 +97,12 @@ function TelaInicial() {
           />
         </Box>
       </Box>
-
+      <ClearAndSendComponent
+        clearFields={ clearFields }
+        isMobile={ isMobile }
+        status={ status }
+        onClick={ () => console.log('teste') }
+      />
     </Box>
   );
 }
