@@ -55,4 +55,9 @@ describe('Testa a Tela Inicial', () => {
     const pre = screen.getByRole('button', { name: /pré/i });
     expect(pre).toHaveStyle({ backgroundColor: selectedColor });
   });
+  test('Se ao abrir a página o botão "SIMULAR" está desabilitidado', () => {
+    renderWithRouter(<TelaInicial />);
+    const simulate = screen.getByRole('button', { name: /SIMULAR/i });
+    expect(simulate).toHaveAttribute('disabled', '');
+  });
 });
