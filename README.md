@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# [React](https://reactjs.org/) &middot; [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/facebook/react/blob/main/LICENSE) [![npm version](https://img.shields.io/npm/v/react.svg?style=flat)](https://www.npmjs.com/package/react) [![CircleCI Status](https://circleci.com/gh/facebook/react.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/facebook/react) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://reactjs.org/docs/how-to-contribute.html#your-first-pull-request)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React is a JavaScript library for building user interfaces.
 
-## Available Scripts
+## Descrição
 
-In the project directory, you can run:
+[Calculadora de Investimentos](https://github.com/ronaldosenajr/Desafio-Tecnico-Eqi) Repositório do Desafio Técnico Frontend da EQI Investimentos.
 
-### `npm start`
+## Instalação
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Clone o **repositório**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- `git@github.com:ronaldosenajr/Desafio-Tecnico-Eqi.git`.
 
-### `npm test`
+2. Navegue entre a pasta do repositório que você acabou de clonar
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- `cd Desafio-Tecnico-Eqi`
 
-### `npm run build`
+3. Entre na branch **tela-inicial**.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Verifique que você está na branch `tela-inicial`
+  - Exemplo: `git branch`
+- Se não estiver, mude para a branch `tela-inicial`
+  - Exemplo: `git checkout tela-inicial`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Instale as dependências do projeto
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- `npm install`
 
-### `npm run eject`
+## Utilização
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+⚠️ 1. Crie um arquivo `.env`
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Crie a variavel `REACT_APP_API_URL` com o valor sendo a `URL` da `API`
+  - Exemplo: `REACT_APP_API_URL=http://localhost:3000`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. Para rodar localmente o projeto, execute o script de start do `package.json`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- `npm start`
 
-## Learn More
+### ⚠️ A Api de backend deve estar rodando para a aplicação funcionar corretamente
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Executando Testes Unitários
+Utilize o jest para executar os testes, use o comando a seguir para executar todos os testes:
+```
+npm test
+```
+Caso queira executar só um arquivo de test use o seguinte comando, considerado que quer testar o arquivo `tests/App.test.js`:
+```
+npm test tests/App.test.js
+```
+ou
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+npm test App
+```
 
-### Code Splitting
+Caso queria ver a cobertura de testes, execute o seguinte comando:
+```
+npm run test-coverage
+```
+## Executando teste de ESLint
+Use o comando a seguir para executar os testes de ESLint:
+```
+npm run lint
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Tecnologias Utilizadas
+- [React](https://reactjs.org/)
+- [MUI: The React UI library you always wanted](https://mui.com/pt/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
+- [Jest](https://jestjs.io/pt-BR/)
+- [ESLint](https://eslint.org/)
+- [Git](https://git-scm.com/)
+- [GitHub](https://github.com/)
