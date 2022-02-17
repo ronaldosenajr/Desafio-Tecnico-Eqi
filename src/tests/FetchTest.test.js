@@ -30,5 +30,21 @@ describe('Testa o App', () => {
       expect(ipca.value).toBe('15');
       expect(fetch).toHaveBeenCalledTimes(1);
     });
+    describe('Testa se a API retorna error', () => {
+      beforeEach(() => {
+        global.fetch = jest.fn(async () => Promise.reject(new Error('API is Down')));
+        renderWithRouter(<TelaInicial />);
+      });
+      afterEach(() => {
+        jest.fn().mockReset();
+      });
+      test('Se os valores não são setados', async () => {
+        const ipca = await screen.findByLabelText(/IPCA/i);
+        const cdi = await screen.findByLabelText(/CDI/i);
+
+        expect(ipca.value).toBe('');
+        expect(cdi.value).toBe('');
+      });
+    });
   });
 });
