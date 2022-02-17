@@ -126,3 +126,5 @@ function TelaInicial() {
 }
 
 export default TelaInicial;
+
+//Criado por Ronaldo Sena Jr.
