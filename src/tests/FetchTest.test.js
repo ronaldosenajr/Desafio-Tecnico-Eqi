@@ -1,9 +1,9 @@
-import { screen, act } from '@testing-library/react';
+import { screen, act, fireEvent } from '@testing-library/react';
 import React from 'react';
 import TelaInicial from '../Pages/TelaInicial';
 import renderWithRouter from './renderWithRouter';
 
-const { indicators } = require('./mockApi');
+const { simulation, indicators } = require('./mockApi');
 
 describe('Testa o App', () => {
   describe(`Se ao iniciar faz uma chamada pra API e seta os valores dos campos 
@@ -45,6 +45,88 @@ describe('Testa o App', () => {
         expect(ipca.value).toBe('');
         expect(cdi.value).toBe('');
       });
+    });
+  });
+  describe('Testa se a API é chamada quando clicado em "SIMULAR"', () => {
+    let aporteInicial = '';
+    let prazoInput = '';
+    let aporteMensal = '';
+    let rentabilidade = '';
+    const sendValues = () => {
+      const simulate = screen.getByRole('button', { name: /SIMULAR/i });
+      fireEvent.click(simulate);
+    };
+    const putValues = () => {
+      const value = 10;
+      fireEvent.change(aporteInicial, { target: { value } });
+      fireEvent.change(prazoInput, { target: { value } });
+      fireEvent.change(aporteMensal, { target: { value } });
+      fireEvent.change(rentabilidade, { target: { value } });
+      sendValues();
+    };
+    beforeEach(() => {
+      renderWithRouter(<TelaInicial />);
+      aporteInicial = screen.getByLabelText('Aporte Inicial');
+      prazoInput = screen.getByLabelText('Prazo (em meses)');
+      aporteMensal = screen.getByLabelText('Aporte Mensal');
+      rentabilidade = screen.getByLabelText('Rentabilidade');
+      global.fetch = jest.fn(() => Promise.resolve({
+        json: () => Promise.resolve(simulation),
+      }));
+    });
+    afterEach(() => {
+      jest.fn().mockReset();
+    });
+
+    test('Se acha o card "Valor Final Bruto"', async () => {
+      putValues();
+      const h3 = await screen.findByText(/Resultado da Simulação/i);
+      const card = await screen.findByText(/Valor Final Bruto/i);
+      const cardValue = await screen.findByText('R$ 2048');
+
+      expect(h3).toBeInTheDocument();
+      expect(card).toBeInTheDocument();
+      expect(cardValue).toBeInTheDocument();
+    });
+    test('Se acha o card "Valor Final Líquido', async () => {
+      putValues();
+      const card = await screen.findByText(/Valor Final Líquido/i);
+      const cardValue = await screen.findByText('R$ 2000');
+
+      expect(card).toBeInTheDocument();
+      expect(cardValue).toBeInTheDocument();
+    });
+    test('Se acha o card "Alíquota do IR', async () => {
+      putValues();
+      const card = await screen.findByText(/Alíquota do IR/i);
+      const cardValue = await screen.findByText('10%');
+
+      expect(card).toBeInTheDocument();
+      expect(cardValue).toBeInTheDocument();
+    });
+    test('Se acha o card "Valor Pago em IR', async () => {
+      putValues();
+      const card = await screen.findByText(/Valor Pago em IR/i);
+      const cardValue = await screen.findByText('R$ 20');
+
+      expect(card).toBeInTheDocument();
+      expect(cardValue).toBeInTheDocument();
+    });
+    test('Se acha o card "Valor Total Investido', async () => {
+      putValues();
+      const card = await screen.findByText(/Valor Total Investido/i);
+      const cardValue = await screen.findByText('R$ 1000');
+
+      expect(card).toBeInTheDocument();
+      expect(cardValue).toBeInTheDocument();
+    });
+    test('Se acha o card "Ganho Líquido', async () => {
+      putValues();
+      const card = await screen.findByText(/Ganho Líquido/i);
+      const cardValue = await screen.findByText('R$ 1048');
+
+      expect(card).toBeInTheDocument();
+      expect(cardValue).toBeInTheDocument();
     });
   });
 });
