@@ -18,4 +18,20 @@ describe('Testa a Tela Inicial', () => {
     expect(rendimento).toBeInTheDocument();
     expect(tiposIndexacao).toBeInTheDocument();
   });
+  test('Se contem os botões "Bruto" e "Líquido"', () => {
+    renderWithRouter(<TelaInicial />);
+    const bruto = screen.getByRole('button', { name: /bruto/i });
+    const liquido = screen.getByRole('button', { name: /líquido/i });
+    expect(bruto).toBeInTheDocument();
+    expect(liquido).toBeInTheDocument();
+  });
+  test('Se contem os botões "PRÉ" "PÓS" E "FIXADO"', () => {
+    renderWithRouter(<TelaInicial />);
+    const pre = screen.getByRole('button', { name: /pré/i });
+    const pos = screen.getByRole('button', { name: 'POS' });
+    const fixado = screen.getByRole('button', { name: /fixado/i });
+    expect(pre).toBeInTheDocument();
+    expect(pos).toBeInTheDocument();
+    expect(fixado).toBeInTheDocument();
+  });
 });
