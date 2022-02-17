@@ -227,5 +227,12 @@ describe('Testa a Tela Inicial', () => {
       const simulate = screen.getByRole('button', { name: /SIMULAR/i });
       expect(simulate).not.toHaveAttribute('disabled', '');
     });
+    test('Se ao preencher com dados inválidos o botão "SIMULATE" permance desabilitado',
+      () => {
+        const value = 'teste';
+        putValues(value);
+        const simulate = screen.getByRole('button', { name: /SIMULAR/i });
+        expect(simulate).toHaveAttribute('disabled', '');
+      });
   });
 });
