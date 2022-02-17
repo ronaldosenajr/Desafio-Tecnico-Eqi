@@ -203,4 +203,29 @@ describe('Testa a Tela Inicial', () => {
       expect(labelError).toBeInTheDocument();
     });
   });
+  describe('Testa preencher o forms com os dados requeridos', () => {
+    let aporteInicial = '';
+    let prazoInput = '';
+    let aporteMensal = '';
+    let rentabilidade = '';
+    beforeEach(() => {
+      renderWithRouter(<TelaInicial />);
+      aporteInicial = screen.getByLabelText('Aporte Inicial');
+      prazoInput = screen.getByLabelText('Prazo (em meses)');
+      aporteMensal = screen.getByLabelText('Aporte Mensal');
+      rentabilidade = screen.getByLabelText('Rentabilidade');
+    });
+    const putValues = (value) => {
+      fireEvent.change(aporteInicial, { target: { value } });
+      fireEvent.change(prazoInput, { target: { value } });
+      fireEvent.change(aporteMensal, { target: { value } });
+      fireEvent.change(rentabilidade, { target: { value } });
+    };
+    test('Se ao preencher com dados válidos o botão "SIMULATE" fica habilitado', () => {
+      const value = 10;
+      putValues(value);
+      const simulate = screen.getByRole('button', { name: /SIMULAR/i });
+      expect(simulate).not.toHaveAttribute('disabled', '');
+    });
+  });
 });
