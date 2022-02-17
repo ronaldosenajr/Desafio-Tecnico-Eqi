@@ -34,4 +34,11 @@ describe('Testa a Tela Inicial', () => {
     expect(pos).toBeInTheDocument();
     expect(fixado).toBeInTheDocument();
   });
+  test('Se contem os botões "Limpar Campos" e "Simular', () => {
+    renderWithRouter(<TelaInicial />);
+    const clearFields = screen.getByRole('button', { name: /LIMPAR CAMPOS/i });
+    const simulate = screen.getByRole('button', { name: /SIMULAR/i });
+    expect(clearFields).toBeInTheDocument();
+    expect(simulate).toBeInTheDocument();
+  });
 });
