@@ -167,4 +167,40 @@ describe('Testa a Tela Inicial', () => {
       expect(labelError).toHaveLength(2);
     });
   });
+  describe('Testa o Inpunt Field "Rentabilidade"', () => {
+    let rentabilidade = '';
+    const ariaInvalid = 'aria-invalid';
+    const msg = 'Rentabilidade deve ser um número';
+    beforeEach(() => {
+      renderWithRouter(<TelaInicial />);
+      rentabilidade = screen.getByLabelText('Rentabilidade');
+    });
+    test(`Se o Input Field "Rentabilidade" está vazio e
+    mostra uma mensagem de error ao iniciar"`, () => {
+      expect(rentabilidade.value).toBe('');
+      const labelError = screen.getByText(msg);
+      expect(labelError).toBeInTheDocument();
+      expect(rentabilidade).toHaveAttribute(ariaInvalid, 'true');
+    });
+    test(`Se o Input Field "Rentabilidade" recebe os valores corretamente e
+    deixa de mostrar a msg de erro`, () => {
+      const value = '20';
+      expect(rentabilidade.value).toBe('');
+      const labelError = screen.getByText(msg);
+      fireEvent.change(rentabilidade, { target: { value: 20 } });
+      expect(rentabilidade.value).toBe(value);
+      expect(rentabilidade).toHaveAttribute(ariaInvalid, 'false');
+      expect(labelError).not.toBeInTheDocument();
+    });
+    test(`Se o Input Field "Rentabilidade" recebe valores incorretos
+     e mostra a mensagem de erro`, () => {
+      expect(rentabilidade.value).toBe('');
+      expect(rentabilidade).toHaveAttribute(ariaInvalid, 'true');
+      const labelError = screen.getByText(msg);
+      expect(labelError).toBeInTheDocument();
+      fireEvent.change(rentabilidade, { target: { value: 'Rentabilidade' } });
+      expect(rentabilidade).toHaveAttribute(ariaInvalid, 'true');
+      expect(labelError).toBeInTheDocument();
+    });
+  });
 });
