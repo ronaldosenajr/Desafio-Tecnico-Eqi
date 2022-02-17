@@ -128,5 +128,18 @@ describe('Testa o App', () => {
       expect(card).toBeInTheDocument();
       expect(cardValue).toBeInTheDocument();
     });
+    describe('Testa se a API retorna error', () => {
+      beforeEach(() => {
+        global.fetch = jest.fn(async () => Promise.reject(new Error('API is Down')));
+      });
+      afterEach(() => {
+        jest.fn().mockReset();
+      });
+      test('Se os valores não são setados', async () => {
+        putValues();
+        const h3 = await screen.queryByText(/Resultado da Simulação/i);
+        expect(h3).not.toBeInTheDocument();
+      });
+    });
   });
 });
