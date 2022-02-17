@@ -16,5 +16,8 @@ jobs:
         - name: instalando as dependências
           run: npm install
 
+        - name: executando o lint
+          run: npm run lint
+
         - name: executando o teste para verificar se há erros
           run: npm test
