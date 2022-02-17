@@ -15,7 +15,6 @@ function TelaInicial() {
   const [ipca, setIpca] = useState('');
   const [cdi, setCdi] = useState('');
   const [status, setStatus] = useState([]);
-
   const { isMobile } = useWindowDimensions();
 
   useEffect(() => {
@@ -87,6 +86,7 @@ function TelaInicial() {
           />
         </Box>
       </Box>
+
     </Box>
   );
 }
