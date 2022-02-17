@@ -234,5 +234,15 @@ describe('Testa a Tela Inicial', () => {
         const simulate = screen.getByRole('button', { name: /SIMULAR/i });
         expect(simulate).toHaveAttribute('disabled', '');
       });
+    test('Se ao clicar no botão "LIMPAR CAMPOS" apaga os valores inseridos', () => {
+      const value = 'teste';
+      putValues(value);
+      const clearFields = screen.getByRole('button', { name: /LIMPAR CAMPOS/i });
+      fireEvent.click(clearFields);
+      expect(aporteInicial.value).toBe('');
+      expect(prazoInput.value).toBe('');
+      expect(aporteMensal.value).toBe('');
+      expect(rentabilidade.value).toBe('');
+    });
   });
 });
