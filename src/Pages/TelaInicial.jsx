@@ -21,7 +21,6 @@ function TelaInicial() {
   const [showResult, setShowResult] = useState(false);
 
   const { isMobile } = useWindowDimensions();
-  console.log(setApiValues);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,6 +49,19 @@ function TelaInicial() {
       rentabilidade: '',
     });
     setShowResult(false);
+  };
+
+  const getDataFromApi = async () => {
+    try {
+      const baseUrl = process.env.REACT_APP_API_URL;
+      const completeUrl = `${baseUrl}/simulacoes?
+    tipoIndexacao=${tipoIndexacao}&tipoRendimento=${tipoRendimento}`;
+      const result = await fetch(completeUrl).then((value) => value.json());
+      setApiValues(result);
+      setShowResult(true);
+    } catch (error) {
+      console.log('API FORA DO AR');
+    }
   };
 
   return (
@@ -107,7 +119,7 @@ function TelaInicial() {
         clearFields={ clearFields }
         isMobile={ isMobile }
         status={ status }
-        onClick={ () => console.log('teste') }
+        onClick={ getDataFromApi }
       />
     </Box>
   );
