@@ -1,7 +1,7 @@
 on: [pull_request]
 
 jobs:
-  eslint:
+  test_suits:
     runs-on: ubuntu-latest
     steps:
         - name: Verifica o repositório do Git
@@ -16,5 +16,5 @@ jobs:
         - name: instalando as dependências
           run: npm install
 
-        - name: executando o teste para verificar se a erros
+        - name: executando o teste para verificar se há erros
           run: npm test
