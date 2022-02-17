@@ -33,6 +33,7 @@ React is a JavaScript library for building user interfaces.
 
 - Crie a variavel `REACT_APP_API_URL` com o valor sendo a `URL` da `API`
   - Exemplo: `REACT_APP_API_URL=http://localhost:3000`
+  - A `Api Fake` pode ser encontrada nesse [link](https://github.com/eqi-investimentos/desafio-fake-api)
 
 2. Para rodar localmente o projeto, execute o script de start do `package.json`.
 
