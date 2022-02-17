@@ -133,4 +133,38 @@ describe('Testa a Tela Inicial', () => {
       expect(newLabelError).toBeInTheDocument();
     });
   });
+  describe('Testa o Input Field "Aporte Mensal"', () => {
+    let aporteMensal = '';
+    beforeEach(() => {
+      renderWithRouter(<TelaInicial />);
+      aporteMensal = screen.getByLabelText('Aporte Mensal');
+    });
+    test(`Se ao iniciar o "Aporte Mensal" está mostrando uma mensagem de erro
+     e está vazio`, () => {
+      const labelError = screen.getAllByText(/Aporte deve ser um número/i);
+      expect(labelError).toHaveLength(2);
+      expect(aporteMensal.value).toBe('');
+    });
+    test(`Se o Input Field "Aporte Mensal" recebe os valores 
+    corretamente e deixa de mostrar a msg de Error`, () => {
+      const value = '1500.00,25';
+      const labelError = screen.getAllByText(/Aporte deve ser um número/i);
+      expect(labelError).toHaveLength(2);
+      expect(aporteMensal.value).toBe('');
+      fireEvent.change(aporteMensal, { target: { value } });
+      expect(aporteMensal.value).toBe(value);
+      const newLabelError = screen.getByText(/Aporte deve ser um número/i);
+      expect(newLabelError).not.toBe('array');
+    });
+    test(`Se o Input Field "Aporte Mensal" continua mostrando a msg de erro
+    se o que foi digitado não for um número`, () => {
+      const value = 'Aporte';
+      const labelError = screen.getAllByText(/Aporte deve ser um número/i);
+      expect(labelError).toHaveLength(2);
+      expect(aporteMensal.value).toBe('');
+      fireEvent.change(aporteMensal, { target: { value } });
+      expect(aporteMensal.value).toBe(value);
+      expect(labelError).toHaveLength(2);
+    });
+  });
 });
