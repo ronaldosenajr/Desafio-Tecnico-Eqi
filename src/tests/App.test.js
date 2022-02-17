@@ -9,6 +9,7 @@ describe('Testa a Tela Inicial', () => {
     renderWithRouter(<App />);
     const h1 = screen.getByRole('heading',
       { name: /Simulador de Investimentos/i });
+
     expect(h1).toBeInTheDocument();
   });
   test('Se contem os textos "Rendimento" e "Tipos de indexação"', () => {
