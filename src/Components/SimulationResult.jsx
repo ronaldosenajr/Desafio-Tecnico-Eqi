@@ -7,7 +7,7 @@ export default function SimulationResult({ apiValues }) {
   const { isMobile } = useWindowDimensions();
   return (
     <div
-      style={ isMobile ? { width: '100%', display: 'flex' } : { display: 'flex',
+      style={ isMobile ? { width: '100%' } : { display: 'flex',
         flexDirection: 'column',
         width: '60%',
         alignSelf: 'start' } }
